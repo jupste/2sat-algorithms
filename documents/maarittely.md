@@ -16,4 +16,6 @@ Työssä käytetään ainakin ArrayList tietorakenteita, jonka lisäksi Tarjanin
 
 Molemmilla algoritmeilla on teoriassa aikavaativuus O(V+E). Harjoitustyön tarkoituksena on selvittää kumpi näistä on käytännössä tehokkaampi.
 
+### Ohjelman saamat syötteet
 
+Ohjelma saa syötteeksi propositiologiikan lauseita, joista ohjelma päättelee onko ne toteutuvia. Lyhyemmät lauseet on luotu käsin kun taas pidemmät lauseet generoidaan omalla metodilla. 
