@@ -13,9 +13,6 @@ import java.util.HashSet;
  * @author jussiste
  */
 public class GraphUtils {
-    public static void addEdge(ArrayList<Integer>[] g, int src, int dest){
-        g[src].add(dest);
-    }
     public static void displayGraph(ArrayList<Integer> []g){
         for(int i= 0; i<g.length; i++){
             System.out.print(i + "-->");

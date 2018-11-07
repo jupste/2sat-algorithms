@@ -94,8 +94,6 @@ public class TarjanAlgorithm {
         for(int check=2*numVariables; check>0; check--){
             int u=order[check];
             if(u > numVariables){
-                System.out.println("+"+u);
-                System.out.println(leader[4]+ " " +leader[2]);
                 if(stronglyConnected(u, u-numVariables)){
                     return false;
                 }
@@ -104,7 +102,6 @@ public class TarjanAlgorithm {
                     truthAssignment.put(u-numVariables, false);
                 }
             }else{
-                System.out.println("--" + u);
                 if(stronglyConnected(u, numVariables+u)){
                     return false;
                 }
