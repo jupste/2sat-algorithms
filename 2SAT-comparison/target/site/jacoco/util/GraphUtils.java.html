@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">2SAT-comparison</a> &gt; <a href="index.source.html" class="el_package">util</a> &gt; <span class="el_source">GraphUtils.java</span></div><h1>GraphUtils.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+/**
+ *
+ * @author jussiste
+ */
+<span class="fc" id="L15">public class GraphUtils {</span>
+    
+    /**
+     * Prints the given graph. Most likely not needed in final program
+     * @param g given graph
+     */
+    public static void displayGraph(ArrayList&lt;Integer&gt; []g){
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for(int i= 0; i&lt;g.length; i++){</span>
+<span class="nc" id="L23">            System.out.print(i + &quot;--&gt;&quot;);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            for(int j=0; j&lt;g[i].size(); j++){</span>
+<span class="nc" id="L25">                System.out.print(g[i].get(j)+ &quot; &quot;);</span>
+            }
+<span class="nc" id="L27">            System.out.println(&quot;&quot;);</span>
+        }
+<span class="nc" id="L29">    }</span>
+
+    /**
+     * 
+     * @param statement the proposition sentence as an integer array. The proposition symbols are labeled as integers so that for example array [1,2,-2,1,1,3] means (1 or 2)and(not 2 or 1)and(1 or 3).
+     * If the array is not even it is not consider a valid CNF sentence and the method returns an empty array.
+     * @return the statement in graph form
+     */
+    public ArrayList&lt;Integer&gt;[] initializeCNF(int[]statement){
+<span class="fc" id="L38">        int count=countVariables(statement);</span>
+<span class="fc" id="L39">        ArrayList&lt;Integer&gt;[] graph=new ArrayList [(4*count*count)];</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        for(int i=0; i&lt;graph.length; i++){</span>
+<span class="fc" id="L41">            graph[i]=new ArrayList&lt;&gt;();</span>
+        }
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if(statement.length%2==1){</span>
+<span class="nc" id="L44">            return graph;</span>
+        }
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for(int i=0; i&lt;statement.length-1; i++){</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if(statement[i] &gt; 0){</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">                if(statement[i+1] &gt; 0){</span>
+<span class="fc" id="L49">                    graph[count+statement[i]].add(statement[i+1]);</span>
+<span class="fc" id="L50">                    graph[count+statement[i+1]].add(statement[i]);</span>
+                }else{
+<span class="fc" id="L52">                    graph[count+statement[i]].add(count-statement[i+1]);</span>
+<span class="fc" id="L53">                    graph[-statement[i+1]].add(statement[i]);</span>
+                }
+            }else{
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                if(statement[i+1] &gt; 0){</span>
+<span class="fc" id="L57">                    graph[-statement[i]].add(statement[i+1]);</span>
+<span class="fc" id="L58">                    graph[count+statement[i+1]].add(count-statement[i]);</span>
+                }else{
+<span class="fc" id="L60">                    graph[-statement[i]].add(count-statement[i+1]);</span>
+<span class="fc" id="L61">                    graph[-statement[i+1]].add(count-statement[i]);</span>
+                }
+            }
+        }
+<span class="fc" id="L65">        return graph;</span>
+    }
+
+    /**
+     * Counts the number of variables in a given sentence. A proposition symbol and it's negation are considered to be the same symbol.
+     * @param statement the given CNF-sentence in integer array form
+     * @return number of variables
+     */
+    public int countVariables(int[]statement){
+<span class="fc" id="L74">        HashSet&lt;Integer&gt; variables=new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for(int i=0; i&lt;statement.length;i++){</span>
+<span class="fc" id="L76">                variables.add(Math.abs(statement[i]));</span>
+        }
+<span class="fc" id="L78">        return variables.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
