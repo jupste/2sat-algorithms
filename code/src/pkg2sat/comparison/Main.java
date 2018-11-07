@@ -16,10 +16,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    // placeholder main method to test code functionality
     public static void main(String[] args) {
         GraphUtils util=new GraphUtils();
-        int[] statement=new int []{1, 2, 1, 3, -1, -3,  3, 2};
+        int[] statement=new int []{1, -1, 1, 3, -1, -3,  3, 2};
         ArrayList<Integer> [] graph= util.initializeCNF(statement);
 
         //util.displayGraph(graph);
