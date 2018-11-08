@@ -11,7 +11,6 @@ package comparison;
  */
 public class BruteForce {
     public boolean checkEveryCombination(int numVariables, int[]statement){
-        numVariables++;
         for (int i = 0; i < Math.pow(2, numVariables); i++) {
             String bin = Integer.toBinaryString(i);
             while (bin.length() < numVariables)
@@ -36,21 +35,21 @@ public class BruteForce {
         for(int i=0; i<statement.length; i+=2){
             if(statement[i]>0){
                 if(statement[i+1]>0){
-                    if(!arguments[statement[i]] && !arguments[statement[i+1]]){
+                    if(!arguments[statement[i]-1] && !arguments[statement[i+1]-1]){
                         return false;
                     }
                 }else{
-                    if(!arguments[statement[i]]&& arguments[-statement[i+1]]){
+                    if(!arguments[statement[i]-1]&& arguments[-statement[i+1]-1]){
                         return false;
                     }
                 }
             }else{
                 if(statement[i+1]>0){
-                    if(arguments[-statement[i]] && !arguments[statement[i+1]]){
+                    if(arguments[-statement[i]-1] && !arguments[statement[i+1]-1]){
                         return false;
                     }
                 }else{
-                    if(arguments[-statement[i]] && arguments[-statement[i+1]]){
+                    if(arguments[-statement[i]-1] && arguments[-statement[i+1]-1]){
                         return false;
                     }
                 }
