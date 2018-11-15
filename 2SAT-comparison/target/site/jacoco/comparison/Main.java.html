@@ -7,26 +7,33 @@ package comparison;
 
 import util.GraphUtils;
 import java.util.ArrayList;
+import util.CustomStack;
 /**
  *
  * @author jussiste
  */
-<span class="nc" id="L14">public class Main {</span>
-
+<span class="nc" id="L15">public class Main {</span>
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-<span class="nc" id="L20">        GraphUtils util=new GraphUtils();</span>
-<span class="nc" id="L21">        int[] statement=new int []{1, -2, 1, 3, -1, -3,  3, 2};</span>
-<span class="nc" id="L22">        ArrayList&lt;Integer&gt; [] graph= util.initializeCNF(statement);</span>
-
-        //util.displayGraph(graph);
-<span class="nc" id="L25">        System.out.println(util.countVariables(statement));</span>
-<span class="nc" id="L26">        TarjanAlgorithm tarjan=new TarjanAlgorithm(graph,util.countVariables(statement));</span>
-        //util.displayGraph(tarjan.getReversegraph());
-<span class="nc" id="L28">        System.out.println(tarjan.checkSatisfiability());</span>
-<span class="nc" id="L29">    }</span>
+////        GraphUtils util=new GraphUtils();
+////        int [] statement= new int[]{1, 2,-1,-2};
+////        ArrayList&lt;Integer&gt; [] graph= util.initializeCNF(statement);
+////        BruteForce brute= new BruteForce();
+////        KosarajuAlgorithm kosajaru= new KosarajuAlgorithm(graph, util.countVariables(statement));
+////        boolean[] arg= new boolean[]{true, true};
+////        System.out.println(&quot;Brute: &quot; +brute.checkEveryCombination(2, statement));
+////        TarjanAlgorithm tarjan=new TarjanAlgorithm(graph,util.countVariables(statement));
+////        //util.displayGraph(tarjan.getReversegraph());
+////        System.out.println(&quot;Tarjan: &quot;+ tarjan.checkSatisfiability());
+////        System.out.println(&quot;Kosajaru: &quot;+ kosajaru.checkSatisfiability());
+<span class="nc" id="L31">            CustomStack&lt;Integer&gt; stack=new CustomStack&lt;&gt;();</span>
+<span class="nc" id="L32">            stack.push(3);</span>
+<span class="nc" id="L33">            stack.push(4);</span>
+<span class="nc" id="L34">            System.out.println(stack.pop());</span>
+<span class="nc" id="L35">            System.out.println(stack.pop());</span>
+<span class="nc" id="L36">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

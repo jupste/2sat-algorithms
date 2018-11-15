@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KosarajuAlgorithm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">2SAT-comparison</a> &gt; <a href="index.source.html" class="el_package">comparison</a> &gt; <span class="el_source">KosarajuAlgorithm.java</span></div><h1>KosarajuAlgorithm.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package comparison;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
+
+/**
+ *
+ * @author jussiste
+ */
+public class KosarajuAlgorithm {
+    private boolean[] visited;
+    private int[] component;
+    private int[] finish;
+    private int[] order;
+    private ArrayList&lt;Integer&gt; [] graph;
+    private ArrayList&lt;Integer&gt; [] reversegraph;
+    private HashMap&lt;Integer, Boolean&gt; truthAssignment;
+    private int t, parent, numVariables, counter;
+    private Stack&lt;Integer&gt; stack;
+
+<span class="nc" id="L27">    public KosarajuAlgorithm(ArrayList&lt;Integer&gt;[] graph, int numVariables) {</span>
+<span class="nc" id="L28">        this.graph = graph;</span>
+<span class="nc" id="L29">        int size=graph.length;</span>
+<span class="nc" id="L30">        this.truthAssignment=new HashMap&lt;&gt;();</span>
+<span class="nc" id="L31">        this.stack=new Stack&lt;&gt;();</span>
+<span class="nc" id="L32">        this.visited=new boolean[size];</span>
+<span class="nc" id="L33">        this.component=new int[size];</span>
+<span class="nc" id="L34">        this.finish=new int[size];</span>
+<span class="nc" id="L35">        this.truthAssignment=new HashMap&lt;&gt;();</span>
+<span class="nc" id="L36">        this.reversegraph= new ArrayList [size];</span>
+<span class="nc" id="L37">        this.parent=0;</span>
+<span class="nc" id="L38">        this.t=0;</span>
+<span class="nc" id="L39">        this.counter=1;</span>
+<span class="nc" id="L40">        this.numVariables = numVariables;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">                for(int i=0; i&lt;size; i++){</span>
+<span class="nc" id="L42">            reversegraph[i]=new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for(int i=0; i&lt;size; i++){</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            for(int j=0; j&lt;graph[i].size(); j++){</span>
+<span class="nc" id="L46">                reversegraph[graph[i].get(j)].add(i);</span>
+            }
+        }
+<span class="nc" id="L49">    }</span>
+    public void dfs(int i){
+<span class="nc" id="L51">        visited[i]=true;</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        for(int iter: graph[i]){</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if(!visited[iter]){</span>
+<span class="nc" id="L54">                dfs(iter);</span>
+            }
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">        stack.push(i); </span>
+<span class="nc" id="L58">    }</span>
+    public boolean stronglyConnected(int u, int v){
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        return component[u]==component[v];</span>
+    }
+    /**
+     * Reverse depth first search used as a utility method in Tarjan's algorithm
+     * @param i current node
+     */
+    public void dfs_reverse(int i){
+<span class="nc" id="L67">        visited[i]=true;</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for(int iter: reversegraph[i]){</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            if(!visited[iter]){</span>
+<span class="nc" id="L70">                dfs_reverse(iter);</span>
+            }
+<span class="nc" id="L72">        }</span>
+<span class="nc" id="L73">        component[i]=counter;</span>
+<span class="nc" id="L74">    }</span>
+    public boolean checkSatisfiability(){
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        for (int i=1;i&lt;=2*numVariables;i++){ </span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (!visited[i]) </span>
+<span class="nc" id="L78">                dfs(i); </span>
+        }
+<span class="nc" id="L80">        this.visited=new boolean[this.graph.length];</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        while(!stack.isEmpty()){</span>
+<span class="nc" id="L82">            int n=stack.pop();</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (!visited[n]){ </span>
+<span class="nc" id="L84">                dfs_reverse(n); </span>
+<span class="nc" id="L85">                counter++; </span>
+            } 
+<span class="nc" id="L87">        }</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        for(int i=1; i&lt;=numVariables; i++){</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if(stronglyConnected(i, i+numVariables)){</span>
+<span class="nc" id="L90">                return false;</span>
+            }
+        }
+<span class="nc" id="L93">        return true;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

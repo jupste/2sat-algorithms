@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BruteForce.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">2SAT-comparison</a> &gt; <a href="index.source.html" class="el_package">comparison</a> &gt; <span class="el_source">BruteForce.java</span></div><h1>BruteForce.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package comparison;
+
+/**
+ *
+ * @author jussiste
+ */
+<span class="nc" id="L12">public class BruteForce {</span>
+    public boolean checkEveryCombination(int numVariables, int[]statement){
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        for (int i = 0; i &lt; Math.pow(2, numVariables); i++) {</span>
+<span class="nc" id="L15">            String bin = Integer.toBinaryString(i);</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            while (bin.length() &lt; numVariables)</span>
+<span class="nc" id="L17">                bin = &quot;0&quot; + bin;</span>
+<span class="nc" id="L18">            char[] chars = bin.toCharArray();</span>
+<span class="nc" id="L19">            boolean[] booleanArray = new boolean[numVariables];</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">            for (int j = 0; j &lt; chars.length; j++) {</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">                booleanArray[j] = chars[j] == '0' ? true : false;</span>
+            }
+<span class="nc bnc" id="L23" title="All 2 branches missed.">            if(checkSatisfiability(statement, booleanArray)){</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">                for(boolean b:booleanArray){</span>
+<span class="nc" id="L25">                    System.out.print(b+ &quot; &quot;);</span>
+                }
+<span class="nc" id="L27">                return true;</span>
+            }
+        }
+<span class="nc" id="L30">        return false;</span>
+    }
+       
+    
+    public boolean checkSatisfiability(int[]statement, boolean[] arguments){
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        for(int i=0; i&lt;statement.length; i+=2){</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if(statement[i]&gt;0){</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                if(statement[i+1]&gt;0){</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">                    if(!arguments[statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
+<span class="nc" id="L39">                        return false;</span>
+                    }
+                }else{
+<span class="nc bnc" id="L42" title="All 4 branches missed.">                    if(!arguments[statement[i]-1]&amp;&amp; arguments[-statement[i+1]-1]){</span>
+<span class="nc" id="L43">                        return false;</span>
+                    }
+                }
+            }else{
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if(statement[i+1]&gt;0){</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">                    if(arguments[-statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
+<span class="nc" id="L49">                        return false;</span>
+                    }
+                }else{
+<span class="nc bnc" id="L52" title="All 4 branches missed.">                    if(arguments[-statement[i]-1] &amp;&amp; arguments[-statement[i+1]-1]){</span>
+<span class="nc" id="L53">                        return false;</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L58">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
