@@ -9,53 +9,62 @@ package comparison;
  *
  * @author jussiste
  */
-<span class="nc" id="L12">public class BruteForce {</span>
+<span class="fc" id="L12">public class BruteForce {</span>
+
+    /**
+     * A method that recursively checks every combination of boolean arrays of size numVariables. Very time intensive and for example as little as 10 variables create over 1000 arrays. O(2^n)
+     * @param numVariables size of array
+     * @param statement given CNF
+     * @return whether there exists a truth distribution that satisfies the given CNF
+     */
     public boolean checkEveryCombination(int numVariables, int[]statement){
-<span class="nc bnc" id="L14" title="All 2 branches missed.">        for (int i = 0; i &lt; Math.pow(2, numVariables); i++) {</span>
-<span class="nc" id="L15">            String bin = Integer.toBinaryString(i);</span>
-<span class="nc bnc" id="L16" title="All 2 branches missed.">            while (bin.length() &lt; numVariables)</span>
-<span class="nc" id="L17">                bin = &quot;0&quot; + bin;</span>
-<span class="nc" id="L18">            char[] chars = bin.toCharArray();</span>
-<span class="nc" id="L19">            boolean[] booleanArray = new boolean[numVariables];</span>
-<span class="nc bnc" id="L20" title="All 2 branches missed.">            for (int j = 0; j &lt; chars.length; j++) {</span>
-<span class="nc bnc" id="L21" title="All 2 branches missed.">                booleanArray[j] = chars[j] == '0' ? true : false;</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (int i = 0; i &lt; Math.pow(2, numVariables); i++) {</span>
+<span class="fc" id="L22">            String bin = Integer.toBinaryString(i);</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            while (bin.length() &lt; numVariables)</span>
+<span class="fc" id="L24">                bin = &quot;0&quot; + bin;</span>
+<span class="fc" id="L25">            char[] chars = bin.toCharArray();</span>
+<span class="fc" id="L26">            boolean[] booleanArray = new boolean[numVariables];</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            for (int j = 0; j &lt; chars.length; j++) {</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">                booleanArray[j] = chars[j] == '0' ? true : false;</span>
             }
-<span class="nc bnc" id="L23" title="All 2 branches missed.">            if(checkSatisfiability(statement, booleanArray)){</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">                for(boolean b:booleanArray){</span>
-<span class="nc" id="L25">                    System.out.print(b+ &quot; &quot;);</span>
-                }
-<span class="nc" id="L27">                return true;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            if(checkSatisfiability(statement, booleanArray)){</span>
+<span class="fc" id="L31">                return true;</span>
             }
         }
-<span class="nc" id="L30">        return false;</span>
+<span class="fc" id="L34">        return false;</span>
     }
        
-    
+    /**
+     * Checks if a given truth distribution can solve the CNF.
+     * @param statement given CNF to solve
+     * @param arguments given truth distribution
+     * @return false if there exists such a conjuction that is wrong with given truth distribution, true if there exists no conflicting conjuction.
+     */
     public boolean checkSatisfiability(int[]statement, boolean[] arguments){
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        for(int i=0; i&lt;statement.length; i+=2){</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">            if(statement[i]&gt;0){</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">                if(statement[i+1]&gt;0){</span>
-<span class="nc bnc" id="L38" title="All 4 branches missed.">                    if(!arguments[statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
-<span class="nc" id="L39">                        return false;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for(int i=0; i&lt;statement.length; i+=2){</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if(statement[i]&gt;0){</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                if(statement[i+1]&gt;0){</span>
+<span class="fc bfc" id="L47" title="All 4 branches covered.">                    if(!arguments[statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
+<span class="fc" id="L48">                        return false;</span>
                     }
                 }else{
-<span class="nc bnc" id="L42" title="All 4 branches missed.">                    if(!arguments[statement[i]-1]&amp;&amp; arguments[-statement[i+1]-1]){</span>
-<span class="nc" id="L43">                        return false;</span>
+<span class="pc bpc" id="L51" title="1 of 4 branches missed.">                    if(!arguments[statement[i]-1]&amp;&amp; arguments[-statement[i+1]-1]){</span>
+<span class="fc" id="L52">                        return false;</span>
                     }
                 }
             }else{
-<span class="nc bnc" id="L47" title="All 2 branches missed.">                if(statement[i+1]&gt;0){</span>
-<span class="nc bnc" id="L48" title="All 4 branches missed.">                    if(arguments[-statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
-<span class="nc" id="L49">                        return false;</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                if(statement[i+1]&gt;0){</span>
+<span class="pc bpc" id="L57" title="1 of 4 branches missed.">                    if(arguments[-statement[i]-1] &amp;&amp; !arguments[statement[i+1]-1]){</span>
+<span class="fc" id="L58">                        return false;</span>
                     }
                 }else{
-<span class="nc bnc" id="L52" title="All 4 branches missed.">                    if(arguments[-statement[i]-1] &amp;&amp; arguments[-statement[i+1]-1]){</span>
-<span class="nc" id="L53">                        return false;</span>
+<span class="fc bfc" id="L61" title="All 4 branches covered.">                    if(arguments[-statement[i]-1] &amp;&amp; arguments[-statement[i+1]-1]){</span>
+<span class="fc" id="L62">                        return false;</span>
                     }
                 }
             }
         }
-<span class="nc" id="L58">        return true;</span>
+<span class="fc" id="L67">        return true;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -28,9 +28,6 @@ public class BruteForce {
                 booleanArray[j] = chars[j] == '0' ? true : false;
             }
             if(checkSatisfiability(statement, booleanArray)){
-                for(boolean b:booleanArray){
-                    System.out.print(b+ " ");
-                }
                 return true;
             }
         }

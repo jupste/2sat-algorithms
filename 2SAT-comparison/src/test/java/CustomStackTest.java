@@ -56,4 +56,13 @@ public class CustomStackTest {
         stack.pop();
         assertEquals((long)stack.size(), 1L);
     }
+    @Test
+    public void whenStackIsFullNoNewItemsCanBeAdded(){
+        CustomStack<TestObject> stack=new CustomStack<>();
+        assertTrue(stack.isEmpty());
+        for(int i=0; i<1000000; i++){
+            stack.push(new TestObject());
+        }
+        assertEquals(stack.size(), 100000);
+    }
 }

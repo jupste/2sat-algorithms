@@ -10,43 +10,42 @@ package util;
  * @author jussiste
  */
 public class CustomStack&lt;T&gt; {
-    private static final int MAX = 10000; 
+    private static final int MAX = 100000; 
     private int top;
     private int size;
-    // Maximum size of Stack 
-<span class="fc" id="L17">    private T stack[]=null; </span>
+<span class="fc" id="L16">    private T stack[]=null; </span>
     
-<span class="fc" id="L19">    public CustomStack(){</span>
-<span class="fc" id="L20">        this.stack = (T[]) new Object[MAX];</span>
-<span class="fc" id="L21">        top=-1;</span>
-<span class="fc" id="L22">        size=0;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L18">    public CustomStack(){</span>
+<span class="fc" id="L19">        this.stack = (T[]) new Object[MAX];</span>
+<span class="fc" id="L20">        top=-1;</span>
+<span class="fc" id="L21">        size=0;</span>
+<span class="fc" id="L22">    }</span>
     public int size(){
-<span class="fc" id="L25">        return this.size;</span>
+<span class="fc" id="L24">        return this.size;</span>
     }
     
     public boolean isEmpty(){ 
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        return size==0; </span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        return size==0; </span>
     }
     public T pop(){
-<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if(this.size==0){</span>
-<span class="nc" id="L33">            return null;</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if(this.size==0){</span>
+<span class="nc" id="L32">            return null;</span>
         }
-<span class="fc" id="L35">        this.size--;</span>
-<span class="fc" id="L36">        T ret =this.stack[top];</span>
-<span class="fc" id="L37">        this.stack[top]=null;</span>
-<span class="fc" id="L38">        this.top--;</span>
+<span class="fc" id="L34">        this.size--;</span>
+<span class="fc" id="L35">        T ret =this.stack[top];</span>
+<span class="fc" id="L36">        this.stack[top]=null;</span>
+<span class="fc" id="L37">        this.top--;</span>
         
-<span class="fc" id="L40">        return ret;</span>
+<span class="fc" id="L39">        return ret;</span>
     }
     
     public void push(T t){
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if(this.size==MAX){</span>
-<span class="nc" id="L45">            return;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(this.size==MAX){</span>
+<span class="fc" id="L44">            return;</span>
         }
-<span class="fc" id="L47">        this.size++;</span>
-<span class="fc" id="L48">        this.stack[++top]= t;</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L46">        this.size++;</span>
+<span class="fc" id="L47">        this.stack[++top]= t;</span>
+<span class="fc" id="L48">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

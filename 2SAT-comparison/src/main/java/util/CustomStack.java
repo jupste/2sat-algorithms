@@ -10,10 +10,9 @@ package util;
  * @author jussiste
  */
 public class CustomStack<T> {
-    private static final int MAX = 10000; 
+    private static final int MAX = 100000; 
     private int top;
     private int size;
-    // Maximum size of Stack 
     private T stack[]=null; 
     
     public CustomStack(){

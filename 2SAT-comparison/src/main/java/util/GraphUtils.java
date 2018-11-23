@@ -27,7 +27,24 @@ public class GraphUtils {
             System.out.println("");
         }
     }
-
+    public int[] createFromString(String CNF){
+        String parse=CNF.replaceAll(";", "");
+        String[] variables=parse.split(" ");
+        if(variables.length%2!=0){
+            System.out.println("Invalid CNF please try again.");
+            return new int[0];
+        }
+        int [] statement = new int[variables.length];
+        for(int i=0; i<variables.length;i++){
+            try{
+                statement[i]=Integer.parseInt(variables[i]);
+            }catch(NumberFormatException e){
+                System.out.println("Invalid CNF. Please try again");
+                return new int[0];
+            }
+        }
+        return statement;
+    }
     /**
      * 
      * @param statement the proposition sentence as an integer array. The proposition symbols are labeled as integers so that for example array [1,2,-2,1,1,3] means (1 or 2)and(not 2 or 1)and(1 or 3).

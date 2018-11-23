@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomHashmap.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">2SAT-comparison</a> &gt; <a href="index.source.html" class="el_package">util</a> &gt; <span class="el_source">CustomHashmap.java</span></div><h1>CustomHashmap.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+/**
+ * A custom hashmap that can take different key and value types. Uses an
+ * internal static class for entries.
+ *
+ * @author jussiste
+ * @param &lt;K&gt; type of key
+ * @param &lt;V&gt; type of value
+ */
+public class CustomHashmap&lt;K, V&gt; {
+
+    static class HashMapEntry&lt;K, V&gt; {
+
+        private K key;
+        private V value;
+        private HashMapEntry&lt;K, V&gt; next;
+
+<span class="fc" id="L24">        public HashMapEntry(K key, V value, HashMapEntry&lt;K, V&gt; next) {</span>
+<span class="fc" id="L25">            this.key = key;</span>
+<span class="fc" id="L26">            this.value = value;</span>
+<span class="fc" id="L27">            this.next = next;</span>
+<span class="fc" id="L28">        }</span>
+
+        public K getKey() {
+<span class="fc" id="L31">            return key;</span>
+        }
+
+        public V getValue() {
+<span class="fc" id="L35">            return value;</span>
+        }
+
+        public void setValue(V value) {
+<span class="nc" id="L39">            this.value = value;</span>
+<span class="nc" id="L40">        }</span>
+
+    }
+    private HashMapEntry values[];
+<span class="fc" id="L44">    private int capacity = Integer.MAX_VALUE / 5;</span>
+<span class="fc" id="L45">    private int size = 0;</span>
+
+    /**
+     * The constructor creates a new hashmap and initializes it with an array
+     * that can hold about 400 million entries.
+     */
+<span class="fc" id="L51">    public CustomHashmap() {</span>
+<span class="fc" id="L52">        this.values = new HashMapEntry[capacity];</span>
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Method to insert an entry to the hashmap. If there is already an entry at
+     * the place the hash points to, this method checks if it has the same key.
+     * If the key is the same this method will override the value, if it is not
+     * the same the method will find a new place for the entry.
+     *
+     * @param key
+     * @param value
+     */
+    public void put(K key, V value) {
+<span class="fc" id="L65">        HashMapEntry&lt;K, V&gt; entry = new HashMapEntry&lt;&gt;(key, value, null);</span>
+<span class="fc" id="L66">        int hash = hash(key);</span>
+<span class="fc" id="L67">        HashMapEntry&lt;K, V&gt; previous = values[hash];</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (previous == null) {</span>
+<span class="fc" id="L69">            values[hash] = entry;</span>
+<span class="fc" id="L70">            size++;</span>
+<span class="fc" id="L71">            return;</span>
+        }
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        while (previous.next != null) {</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (previous.key.equals(key)) {</span>
+<span class="nc" id="L75">                previous.value = value;</span>
+<span class="nc" id="L76">                return;</span>
+            }
+<span class="nc" id="L78">            previous = previous.next;</span>
+        }
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (previous.key.equals(key)) {</span>
+<span class="fc" id="L81">            previous.value = value;</span>
+        } else {
+<span class="nc" id="L83">            previous.next = entry;</span>
+<span class="nc" id="L84">            size++;</span>
+        }
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * A method to fetch an value out of the hashmap using a key.
+     *
+     * @param key key that searches the value
+     * @return value
+     */
+    public V get(K key) {
+<span class="fc" id="L95">        HashMapEntry entry = values[hash(key)];</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (entry == null) {</span>
+<span class="fc" id="L97">            return null;</span>
+        }
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        while (entry != null) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (entry.getKey().equals(key)) {</span>
+<span class="fc" id="L102">                return (V) entry.getValue();</span>
+            }
+<span class="nc" id="L104">            entry = entry.next;</span>
+        }
+<span class="nc" id="L106">        return null;</span>
+    }
+
+    public boolean containsKey(K key) {
+<span class="fc" id="L110">        HashMapEntry entry = values[hash(key)];</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (entry == null) {</span>
+<span class="fc" id="L112">            return false;</span>
+        }
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        while (entry != null) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (entry.getKey().equals(key)) {</span>
+<span class="fc" id="L116">                return true;</span>
+            }
+<span class="nc" id="L118">            entry = entry.next;</span>
+        }
+<span class="nc" id="L120">        return false;</span>
+    }
+
+    /**
+     * Method that removes a given key from the hashmap along with it's value.
+     *
+     * @param key
+     * @return true if the removal was succesfull, false otherwise.
+     */
+    public boolean remove(K key) {
+<span class="fc" id="L130">        HashMapEntry entry = values[hash(key)];</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if (entry == null) {</span>
+<span class="nc" id="L132">            return false;</span>
+        }
+<span class="fc" id="L134">        HashMapEntry previous = null;</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        while (entry != null) {</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if (entry.getKey().equals(key)) {</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                if (previous == null) {</span>
+<span class="fc" id="L138">                    values[hash(key)] = values[hash(key)].next;</span>
+<span class="fc" id="L139">                    size--;</span>
+<span class="fc" id="L140">                    return true;</span>
+                } else {
+<span class="nc" id="L142">                    previous.next = entry.next;</span>
+<span class="nc" id="L143">                    size--;</span>
+<span class="nc" id="L144">                    return true;</span>
+                }
+            }
+<span class="nc" id="L147">            previous = entry;</span>
+<span class="nc" id="L148">            entry = entry.next;</span>
+        }
+<span class="nc" id="L150">        return false;</span>
+    }
+
+    private int hash(K key) {
+<span class="fc" id="L154">        return key.hashCode() % capacity;</span>
+    }
+
+    /**
+     *
+     * @return size of the hashmap.
+     */
+    public int size() {
+<span class="fc" id="L162">        return this.size;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

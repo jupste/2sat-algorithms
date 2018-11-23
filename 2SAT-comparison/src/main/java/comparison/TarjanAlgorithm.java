@@ -8,6 +8,7 @@ package comparison;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import util.CustomHashmap;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TarjanAlgorithm {
     private int[] order;
     private ArrayList<Integer> [] graph;
     private ArrayList<Integer> [] reversegraph;
-    private HashMap<Integer, Boolean> truthAssignment;
+    private CustomHashmap<Integer, Boolean> truthAssignment;
     private int t, parent, numVariables;
 
     /**
@@ -36,7 +37,7 @@ public class TarjanAlgorithm {
         this.leader=new int[size];
         this.finish=new int[size];
         this.order=new int[size];
-        this.truthAssignment=new HashMap<>();
+        this.truthAssignment=new CustomHashmap<>();
         this.reversegraph= new ArrayList [size];
         this.parent=0;
         this.t=0;
