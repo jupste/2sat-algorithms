@@ -7,6 +7,7 @@ package comparison;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import util.CustomArrayList;
 import util.CustomStack;
 
 /**
@@ -18,28 +19,27 @@ public class KosarajuAlgorithm {
     private int[] component;
     private int[] finish;
     private int[] order;
-    private ArrayList&lt;Integer&gt; [] graph;
-    private ArrayList&lt;Integer&gt; [] reversegraph;
+    private CustomArrayList&lt;Integer&gt; [] graph;
+    private CustomArrayList&lt;Integer&gt; [] reversegraph;
     private HashMap&lt;Integer, Boolean&gt; truthAssignment;
-    private int t, parent, numVariables, counter;
+    private int parent, numVariables, counter;
     private CustomStack&lt;Integer&gt; stack;
 
-<span class="fc" id="L27">    public KosarajuAlgorithm(ArrayList&lt;Integer&gt;[] graph, int numVariables) {</span>
-<span class="fc" id="L28">        this.graph = graph;</span>
-<span class="fc" id="L29">        int size=graph.length;</span>
-<span class="fc" id="L30">        this.truthAssignment=new HashMap&lt;&gt;();</span>
-<span class="fc" id="L31">        this.stack=new CustomStack&lt;&gt;();</span>
-<span class="fc" id="L32">        this.visited=new boolean[size];</span>
-<span class="fc" id="L33">        this.component=new int[size];</span>
-<span class="fc" id="L34">        this.finish=new int[size];</span>
-<span class="fc" id="L35">        this.truthAssignment=new HashMap&lt;&gt;();</span>
-<span class="fc" id="L36">        this.reversegraph= new ArrayList [size];</span>
-<span class="fc" id="L37">        this.parent=0;</span>
-<span class="fc" id="L38">        this.t=0;</span>
+<span class="fc" id="L28">    public KosarajuAlgorithm(CustomArrayList&lt;Integer&gt;[] graph, int numVariables) {</span>
+<span class="fc" id="L29">        this.graph = graph;</span>
+<span class="fc" id="L30">        int size=graph.length;</span>
+<span class="fc" id="L31">        this.truthAssignment=new HashMap&lt;&gt;();</span>
+<span class="fc" id="L32">        this.stack=new CustomStack&lt;&gt;();</span>
+<span class="fc" id="L33">        this.visited=new boolean[size];</span>
+<span class="fc" id="L34">        this.component=new int[size];</span>
+<span class="fc" id="L35">        this.finish=new int[size];</span>
+<span class="fc" id="L36">        this.truthAssignment=new HashMap&lt;&gt;();</span>
+<span class="fc" id="L37">        this.reversegraph= new CustomArrayList [size];</span>
+<span class="fc" id="L38">        this.parent=0;</span>
 <span class="fc" id="L39">        this.counter=1;</span>
 <span class="fc" id="L40">        this.numVariables = numVariables;</span>
 <span class="fc bfc" id="L41" title="All 2 branches covered.">                for(int i=0; i&lt;size; i++){</span>
-<span class="fc" id="L42">            reversegraph[i]=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">            reversegraph[i]=new CustomArrayList&lt;&gt;();</span>
         }
 <span class="fc bfc" id="L44" title="All 2 branches covered.">        for(int i=0; i&lt;size; i++){</span>
 <span class="fc bfc" id="L45" title="All 2 branches covered.">            for(int j=0; j&lt;graph[i].size(); j++){</span>

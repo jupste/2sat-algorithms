@@ -10,6 +10,7 @@ import comparison.KosarajuAlgorithm;
 import comparison.TarjanAlgorithm;
 import java.util.ArrayList;
 import java.util.Scanner;
+import util.CustomArrayList;
 import util.GraphUtils;
 
 /**
@@ -73,7 +74,7 @@ public class ConsoleUI {
         String CNF = scanner.nextLine();
         statement = util.createFromString(CNF);
         numVariables = util.countVariables(statement);
-        ArrayList<Integer>[] graph = util.initializeCNF(statement);
+        CustomArrayList<Integer>[] graph = util.initializeCNF(statement);
 
         while (true) {
             System.out.println("Which algorithm do you want to use to solve this?");

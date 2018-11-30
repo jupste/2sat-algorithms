@@ -8,6 +8,7 @@ package comparison;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import util.CustomArrayList;
 import util.CustomHashmap;
 
 /**
@@ -19,8 +20,8 @@ public class TarjanAlgorithm {
     private int[] leader;
     private int[] finish;
     private int[] order;
-    private ArrayList<Integer> [] graph;
-    private ArrayList<Integer> [] reversegraph;
+    private CustomArrayList<Integer> [] graph;
+    private CustomArrayList<Integer> [] reversegraph;
     private CustomHashmap<Integer, Boolean> truthAssignment;
     private int t, parent, numVariables;
 
@@ -30,7 +31,7 @@ public class TarjanAlgorithm {
      * @param numVariables number of variables in the graph. Note that a proposition symbol and it's negation are considered 
      * as the same variable in this case. 
      */
-    public TarjanAlgorithm(ArrayList<Integer>[] graph, int numVariables) {
+    public TarjanAlgorithm(CustomArrayList<Integer>[] graph, int numVariables) {
         int size=graph.length;
         this.graph = graph;
         this.visited=new boolean[size];
@@ -38,12 +39,11 @@ public class TarjanAlgorithm {
         this.finish=new int[size];
         this.order=new int[size];
         this.truthAssignment=new CustomHashmap<>();
-        this.reversegraph= new ArrayList [size];
+        this.reversegraph= new CustomArrayList [size];
         this.parent=0;
-        this.t=0;
         this.numVariables=numVariables;
         for(int i=0; i<size; i++){
-            reversegraph[i]=new ArrayList<>();
+            reversegraph[i]=new CustomArrayList<>();
         }
         for(int i=0; i<size; i++){
             for(int j=0; j<graph[i].size(); j++){
@@ -56,7 +56,7 @@ public class TarjanAlgorithm {
      * Not needed in final program
      * @return
      */
-    public ArrayList<Integer>[] getGraph() {
+    public CustomArrayList<Integer>[] getGraph() {
         return graph;
     }
     
@@ -64,7 +64,7 @@ public class TarjanAlgorithm {
      * Not needed in final program
      * @return
      */
-    public ArrayList<Integer>[] getReversegraph() {
+    public CustomArrayList<Integer>[] getReversegraph() {
         return reversegraph;
     }
     

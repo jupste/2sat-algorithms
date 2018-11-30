@@ -51,11 +51,11 @@ import java.util.HashSet;
      * If the array is not even it is not consider a valid CNF sentence and the method returns an empty array.
      * @return the statement in graph form
      */
-    public ArrayList&lt;Integer&gt;[] initializeCNF(int[]statement){
+    public CustomArrayList&lt;Integer&gt;[] initializeCNF(int[]statement){
 <span class="fc" id="L55">        int count=countVariables(statement);</span>
-<span class="fc" id="L56">        ArrayList&lt;Integer&gt;[] graph=new ArrayList [(4*count*count)];</span>
+<span class="fc" id="L56">        CustomArrayList&lt;Integer&gt;[] graph=new CustomArrayList [(4*count*count)];</span>
 <span class="fc bfc" id="L57" title="All 2 branches covered.">        for(int i=0; i&lt;graph.length; i++){</span>
-<span class="fc" id="L58">            graph[i]=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L58">            graph[i]=new CustomArrayList&lt;&gt;();</span>
         }
 <span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(statement.length%2==1){</span>
 <span class="nc" id="L61">            return graph;</span>

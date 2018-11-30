@@ -51,11 +51,11 @@ public class GraphUtils {
      * If the array is not even it is not consider a valid CNF sentence and the method returns an empty array.
      * @return the statement in graph form
      */
-    public ArrayList<Integer>[] initializeCNF(int[]statement){
+    public CustomArrayList<Integer>[] initializeCNF(int[]statement){
         int count=countVariables(statement);
-        ArrayList<Integer>[] graph=new ArrayList [(4*count*count)];
+        CustomArrayList<Integer>[] graph=new CustomArrayList [(4*count*count)];
         for(int i=0; i<graph.length; i++){
-            graph[i]=new ArrayList<>();
+            graph[i]=new CustomArrayList<>();
         }
         if(statement.length%2==1){
             return graph;

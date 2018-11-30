@@ -7,6 +7,7 @@ package comparison;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import util.CustomArrayList;
 import util.CustomStack;
 
 /**
@@ -18,13 +19,13 @@ public class KosarajuAlgorithm {
     private int[] component;
     private int[] finish;
     private int[] order;
-    private ArrayList<Integer> [] graph;
-    private ArrayList<Integer> [] reversegraph;
+    private CustomArrayList<Integer> [] graph;
+    private CustomArrayList<Integer> [] reversegraph;
     private HashMap<Integer, Boolean> truthAssignment;
-    private int t, parent, numVariables, counter;
+    private int parent, numVariables, counter;
     private CustomStack<Integer> stack;
 
-    public KosarajuAlgorithm(ArrayList<Integer>[] graph, int numVariables) {
+    public KosarajuAlgorithm(CustomArrayList<Integer>[] graph, int numVariables) {
         this.graph = graph;
         int size=graph.length;
         this.truthAssignment=new HashMap<>();
@@ -33,13 +34,12 @@ public class KosarajuAlgorithm {
         this.component=new int[size];
         this.finish=new int[size];
         this.truthAssignment=new HashMap<>();
-        this.reversegraph= new ArrayList [size];
+        this.reversegraph= new CustomArrayList [size];
         this.parent=0;
-        this.t=0;
         this.counter=1;
         this.numVariables = numVariables;
                 for(int i=0; i<size; i++){
-            reversegraph[i]=new ArrayList<>();
+            reversegraph[i]=new CustomArrayList<>();
         }
         for(int i=0; i<size; i++){
             for(int j=0; j<graph[i].size(); j++){

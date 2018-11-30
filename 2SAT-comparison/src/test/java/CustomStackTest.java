@@ -65,4 +65,5 @@ public class CustomStackTest {
         }
         assertEquals(stack.size(), 100000);
     }
+
 }

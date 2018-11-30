@@ -9,6 +9,7 @@ import util.GraphUtils;
 import java.util.ArrayList;
 import java.util.Scanner;
 import ui.ConsoleUI;
+import util.CustomArrayList;
 import util.CustomHashmap;
 import util.CustomStack;
 /**

@@ -1,5 +1,6 @@
 /home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/comparison/KosarajuAlgorithm.java
 /home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/comparison/TarjanAlgorithm.java
+/home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/util/CustomArrayList.java
 /home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/comparison/BruteForce.java
 /home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/util/CustomStack.java
 /home/local/jussiste/2sat-algorithms/2SAT-comparison/src/main/java/ui/ConsoleUI.java
