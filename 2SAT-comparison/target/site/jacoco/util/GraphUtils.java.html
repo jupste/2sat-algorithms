@@ -5,94 +5,124 @@
  */
 package util;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import util.CustomHashSet;
 
 /**
  *
  * @author jussiste
  */
-<span class="fc" id="L15">public class GraphUtils {</span>
-    
+<span class="fc" id="L14">public class GraphUtils {</span>
+
     /**
-     * Prints the given graph. Most likely not needed in final program
-     * @param g given graph
+     * @param CNF string that contains only numbers
+     * @return the CNF in integer array form if the string is valid. Otherwise returns an empty array.
      */
-    public static void displayGraph(ArrayList&lt;Integer&gt; []g){
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for(int i= 0; i&lt;g.length; i++){</span>
-<span class="nc" id="L23">            System.out.print(i + &quot;--&gt;&quot;);</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">            for(int j=0; j&lt;g[i].size(); j++){</span>
-<span class="nc" id="L25">                System.out.print(g[i].get(j)+ &quot; &quot;);</span>
-            }
-<span class="nc" id="L27">            System.out.println(&quot;&quot;);</span>
+    public int[] createFromString(String CNF) {
+<span class="fc" id="L21">        String parse = CNF.replaceAll(&quot;;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L22">        String[] variables = parse.split(&quot; &quot;);</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (variables.length % 2 != 0) {</span>
+<span class="nc" id="L24">            System.out.println(&quot;Invalid CNF please try again.&quot;);</span>
+<span class="nc" id="L25">            return new int[0];</span>
         }
-<span class="nc" id="L29">    }</span>
-    public int[] createFromString(String CNF){
-<span class="nc" id="L31">        String parse=CNF.replaceAll(&quot;;&quot;, &quot;&quot;);</span>
-<span class="nc" id="L32">        String[] variables=parse.split(&quot; &quot;);</span>
-<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(variables.length%2!=0){</span>
-<span class="nc" id="L34">            System.out.println(&quot;Invalid CNF please try again.&quot;);</span>
-<span class="nc" id="L35">            return new int[0];</span>
+<span class="fc" id="L27">        int[] statement = new int[variables.length];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; variables.length; i++) {</span>
+            try {
+<span class="fc" id="L30">                statement[i] = Integer.parseInt(variables[i]);</span>
+<span class="nc" id="L31">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L32">                System.out.println(&quot;Invalid CNF. Please try again&quot;);</span>
+<span class="nc" id="L33">                return new int[0];</span>
+<span class="fc" id="L34">            }</span>
         }
-<span class="nc" id="L37">        int [] statement = new int[variables.length];</span>
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        for(int i=0; i&lt;variables.length;i++){</span>
-            try{
-<span class="nc" id="L40">                statement[i]=Integer.parseInt(variables[i]);</span>
-<span class="nc" id="L41">            }catch(NumberFormatException e){</span>
-<span class="nc" id="L42">                System.out.println(&quot;Invalid CNF. Please try again&quot;);</span>
-<span class="nc" id="L43">                return new int[0];</span>
-<span class="nc" id="L44">            }</span>
-        }
-<span class="nc" id="L46">        return statement;</span>
-    }
-    /**
-     * 
-     * @param statement the proposition sentence as an integer array. The proposition symbols are labeled as integers so that for example array [1,2,-2,1,1,3] means (1 or 2)and(not 2 or 1)and(1 or 3).
-     * If the array is not even it is not consider a valid CNF sentence and the method returns an empty array.
-     * @return the statement in graph form
-     */
-    public CustomArrayList&lt;Integer&gt;[] initializeCNF(int[]statement){
-<span class="fc" id="L55">        int count=countVariables(statement);</span>
-<span class="fc" id="L56">        CustomArrayList&lt;Integer&gt;[] graph=new CustomArrayList [(4*count*count)];</span>
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        for(int i=0; i&lt;graph.length; i++){</span>
-<span class="fc" id="L58">            graph[i]=new CustomArrayList&lt;&gt;();</span>
-        }
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if(statement.length%2==1){</span>
-<span class="nc" id="L61">            return graph;</span>
-        }
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        for(int i=0; i&lt;statement.length-1; i++){</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">            if(statement[i] &gt; 0){</span>
-<span class="fc bfc" id="L65" title="All 2 branches covered.">                if(statement[i+1] &gt; 0){</span>
-<span class="fc" id="L66">                    graph[count+statement[i]].add(statement[i+1]);</span>
-<span class="fc" id="L67">                    graph[count+statement[i+1]].add(statement[i]);</span>
-                }else{
-<span class="fc" id="L69">                    graph[count+statement[i]].add(count-statement[i+1]);</span>
-<span class="fc" id="L70">                    graph[-statement[i+1]].add(statement[i]);</span>
-                }
-            }else{
-<span class="fc bfc" id="L73" title="All 2 branches covered.">                if(statement[i+1] &gt; 0){</span>
-<span class="fc" id="L74">                    graph[-statement[i]].add(statement[i+1]);</span>
-<span class="fc" id="L75">                    graph[count+statement[i+1]].add(count-statement[i]);</span>
-                }else{
-<span class="fc" id="L77">                    graph[-statement[i]].add(count-statement[i+1]);</span>
-<span class="fc" id="L78">                    graph[-statement[i+1]].add(count-statement[i]);</span>
-                }
-            }
-        }
-<span class="fc" id="L82">        return graph;</span>
+<span class="fc" id="L36">        return statement;</span>
     }
 
     /**
-     * Counts the number of variables in a given sentence. A proposition symbol and it's negation are considered to be the same symbol.
+     *
+     * @param statement the proposition sentence as an integer array. The
+     * proposition symbols are labeled as integers so that for example array
+     * [1,2,-2,1,1,3] means (1 or 2)and(not 2 or 1)and(1 or 3). If the array is
+     * not even it is not consider a valid CNF sentence and the method returns
+     * an empty array.
+     * @return the statement in graph form
+     */
+    public CustomArrayList&lt;Integer&gt;[] initializeCNF(int[] statement) {
+<span class="fc" id="L49">        int count = countVariables(statement);</span>
+<span class="fc" id="L50">        CustomArrayList&lt;Integer&gt;[] graph = new CustomArrayList[(4 * count * count)];</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int i = 0; i &lt; graph.length; i++) {</span>
+<span class="fc" id="L52">            graph[i] = new CustomArrayList&lt;&gt;();</span>
+        }
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (statement.length % 2 == 1) {</span>
+<span class="nc" id="L55">            return graph;</span>
+        }
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length - 1; i++) {</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (statement[i] &gt; 0) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
+<span class="fc" id="L60">                    graph[count + statement[i]].add(statement[i + 1]);</span>
+<span class="fc" id="L61">                    graph[count + statement[i + 1]].add(statement[i]);</span>
+                } else {
+<span class="fc" id="L63">                    graph[count + statement[i]].add(count - statement[i + 1]);</span>
+<span class="fc" id="L64">                    graph[-statement[i + 1]].add(statement[i]);</span>
+                }
+            } else {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
+<span class="fc" id="L68">                    graph[-statement[i]].add(statement[i + 1]);</span>
+<span class="fc" id="L69">                    graph[count + statement[i + 1]].add(count - statement[i]);</span>
+                } else {
+<span class="fc" id="L71">                    graph[-statement[i]].add(count - statement[i + 1]);</span>
+<span class="fc" id="L72">                    graph[-statement[i + 1]].add(count - statement[i]);</span>
+                }
+            }
+        }
+<span class="fc" id="L76">        return graph;</span>
+    }
+
+    /**
+     * Generates a large int array that is satisfiable and has a certain number
+     * of variables
+     *
+     * @param variables number of variables in the CNF
+     * @return
+     */
+    public int[] initializeLargeSatisfiable(int variables) {
+<span class="fc" id="L87">        int[] statement = new int[1000000];</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L89">            statement[i] = i % variables + 1;</span>
+        }
+<span class="fc" id="L91">        return statement;</span>
+    }
+
+    /**
+     * Generates a large int array that is not satisfiable and has a certain number
+     * of variables
+     *
+     * @param variables number of variables in the CNF
+     * @return
+     */
+    public int[] initializeLargeNonSatisfiable(int variables) {
+<span class="fc" id="L102">        int[] statement = new int[1000000];</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L104">            statement[i] = i % variables + 1;</span>
+        }
+<span class="fc" id="L106">        statement[100] = 1;</span>
+<span class="fc" id="L107">        statement[101] = 1;</span>
+<span class="fc" id="L108">        statement[102] = -1;</span>
+<span class="fc" id="L109">        statement[103] = -1;</span>
+<span class="fc" id="L110">        return statement;</span>
+    }
+
+    /**
+     * Counts the number of variables in a given sentence. A proposition symbol
+     * and it's negation are considered to be the same symbol.
+     *
      * @param statement the given CNF-sentence in integer array form
      * @return number of variables
      */
-    public int countVariables(int[]statement){
-<span class="fc" id="L91">        HashSet&lt;Integer&gt; variables=new HashSet&lt;&gt;();</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        for(int i=0; i&lt;statement.length;i++){</span>
-<span class="fc" id="L93">                variables.add(Math.abs(statement[i]));</span>
+    public int countVariables(int[] statement) {
+<span class="fc" id="L121">        CustomHashSet&lt;Integer&gt; variables = new CustomHashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L123">            variables.add(Math.abs(statement[i]));</span>
         }
-<span class="fc" id="L95">        return variables.size();</span>
+<span class="fc" id="L125">        return variables.size();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

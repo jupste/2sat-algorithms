@@ -5,38 +5,21 @@
  */
 package comparison;
 
-import util.GraphUtils;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 import ui.ConsoleUI;
-import util.CustomArrayList;
-import util.CustomHashmap;
-import util.CustomStack;
 /**
  *
  * @author jussiste
  */
-<span class="nc" id="L19">public class Main {</span>
+<span class="nc" id="L15">public class Main {</span>
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-<span class="nc" id="L24">        ConsoleUI ui=new ConsoleUI();</span>
-<span class="nc" id="L25">        ui.start();</span>
-//        ui.displayHelp();
-//        GraphUtils util=new GraphUtils();
-//        int [] statement= new int[]{1, 2,-1,-2};
-//        ArrayList&lt;Integer&gt; [] graph= util.initializeCNF(statement);
-//        BruteForce brute= new BruteForce();
-//        KosarajuAlgorithm kosajaru= new KosarajuAlgorithm(graph, util.countVariables(statement));
-//        boolean[] arg= new boolean[]{true, true};
-//        System.out.println(&quot;Brute: &quot; +brute.checkEveryCombination(2, statement));
-//        TarjanAlgorithm tarjan=new TarjanAlgorithm(graph,util.countVariables(statement));
-//        //util.displayGraph(tarjan.getReversegraph());
-//        System.out.println(&quot;Tarjan: &quot;+ tarjan.checkSatisfiability());
-//        System.out.println(&quot;Kosajaru: &quot;+ kosajaru.checkSatisfiability());
-//  
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L20">        ConsoleUI ui=new ConsoleUI(new Scanner(System.in));</span>
+<span class="nc" id="L21">        ui.start();  </span>
+<span class="nc" id="L22">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

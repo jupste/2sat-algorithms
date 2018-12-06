@@ -5,9 +5,6 @@
  */
 package comparison;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import util.CustomArrayList;
 import util.CustomHashmap;
 
@@ -31,34 +28,33 @@ public class TarjanAlgorithm {
      * @param numVariables number of variables in the graph. Note that a proposition symbol and it's negation are considered 
      * as the same variable in this case. 
      */
-<span class="fc" id="L34">    public TarjanAlgorithm(CustomArrayList&lt;Integer&gt;[] graph, int numVariables) {</span>
-<span class="fc" id="L35">        int size=graph.length;</span>
-<span class="fc" id="L36">        this.graph = graph;</span>
-<span class="fc" id="L37">        this.visited=new boolean[size];</span>
-<span class="fc" id="L38">        this.leader=new int[size];</span>
-<span class="fc" id="L39">        this.finish=new int[size];</span>
-<span class="fc" id="L40">        this.order=new int[size];</span>
-<span class="fc" id="L41">        this.truthAssignment=new CustomHashmap&lt;&gt;();</span>
-<span class="fc" id="L42">        this.reversegraph= new CustomArrayList [size];</span>
-<span class="fc" id="L43">        this.parent=0;</span>
-<span class="fc" id="L44">        this.t=0;</span>
-<span class="fc" id="L45">        this.numVariables=numVariables;</span>
-<span class="fc bfc" id="L46" title="All 2 branches covered.">        for(int i=0; i&lt;size; i++){</span>
-<span class="fc" id="L47">            reversegraph[i]=new CustomArrayList&lt;&gt;();</span>
+<span class="fc" id="L31">    public TarjanAlgorithm(CustomArrayList&lt;Integer&gt;[] graph, int numVariables) {</span>
+<span class="fc" id="L32">        int size=graph.length;</span>
+<span class="fc" id="L33">        this.graph = graph;</span>
+<span class="fc" id="L34">        this.visited=new boolean[size];</span>
+<span class="fc" id="L35">        this.leader=new int[size];</span>
+<span class="fc" id="L36">        this.finish=new int[size];</span>
+<span class="fc" id="L37">        this.order=new int[size];</span>
+<span class="fc" id="L38">        this.truthAssignment=new CustomHashmap&lt;&gt;();</span>
+<span class="fc" id="L39">        this.reversegraph= new CustomArrayList [size];</span>
+<span class="fc" id="L40">        this.parent=0;</span>
+<span class="fc" id="L41">        this.numVariables=numVariables;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for(int i=0; i&lt;size; i++){</span>
+<span class="fc" id="L43">            reversegraph[i]=new CustomArrayList&lt;&gt;();</span>
         }
-<span class="fc bfc" id="L49" title="All 2 branches covered.">        for(int i=0; i&lt;size; i++){</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">            for(int j=0; j&lt;graph[i].size(); j++){</span>
-<span class="fc" id="L51">                reversegraph[graph[i].get(j)].add(i);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for(int i=0; i&lt;size; i++){</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            for(int j=0; j&lt;graph[i].size(); j++){</span>
+<span class="fc" id="L47">                reversegraph[graph[i].get(j)].add(i);</span>
             }
         }
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L50">    }</span>
 
     /**
      * Not needed in final program
      * @return
      */
     public CustomArrayList&lt;Integer&gt;[] getGraph() {
-<span class="nc" id="L61">        return graph;</span>
+<span class="nc" id="L57">        return graph;</span>
     }
     
     /**
@@ -66,7 +62,7 @@ public class TarjanAlgorithm {
      * @return
      */
     public CustomArrayList&lt;Integer&gt;[] getReversegraph() {
-<span class="nc" id="L69">        return reversegraph;</span>
+<span class="nc" id="L65">        return reversegraph;</span>
     }
     
     /**
@@ -74,29 +70,29 @@ public class TarjanAlgorithm {
      * @param i current node
      */
     public void dfs(int i){
-<span class="fc" id="L77">        visited[i]=true;</span>
-<span class="fc" id="L78">        leader[i]=parent;</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">        for(int iter: graph[i]){</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">            if(!visited[iter]){</span>
-<span class="fc" id="L81">                dfs(iter);</span>
+<span class="fc" id="L73">        visited[i]=true;</span>
+<span class="fc" id="L74">        leader[i]=parent;</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for(int iter: graph[i]){</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if(!visited[iter]){</span>
+<span class="fc" id="L77">                dfs(iter);</span>
             }
-<span class="fc" id="L83">        }</span>
-<span class="fc" id="L84">    }</span>
+<span class="fc" id="L79">        }</span>
+<span class="fc" id="L80">    }</span>
 
     /**
      * Reverse depth first search used as a utility method in Tarjan's algorithm
      * @param i current node
      */
     public void dfs_reverse(int i){
-<span class="fc" id="L91">        visited[i]=true;</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        for(int iter: reversegraph[i]){</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">            if(!visited[iter]){</span>
-<span class="fc" id="L94">                dfs_reverse(iter);</span>
+<span class="fc" id="L87">        visited[i]=true;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        for(int iter: reversegraph[i]){</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if(!visited[iter]){</span>
+<span class="fc" id="L90">                dfs_reverse(iter);</span>
             }
-<span class="fc" id="L96">        }</span>
-<span class="fc" id="L97">        t++;</span>
-<span class="fc" id="L98">        finish[i]=t;</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L92">        }</span>
+<span class="fc" id="L93">        t++;</span>
+<span class="fc" id="L94">        finish[i]=t;</span>
+<span class="fc" id="L95">    }</span>
 
     /**
      * Check if the two nodes are strongly connected
@@ -105,7 +101,7 @@ public class TarjanAlgorithm {
      * @return true if nodes are strongly connected, false otherwise 
      */
     public boolean stronglyConnected(int u, int v){
-<span class="fc bfc" id="L108" title="All 2 branches covered.">        return leader[u]==leader[v];</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        return leader[u]==leader[v];</span>
     }
 
     /**
@@ -114,41 +110,41 @@ public class TarjanAlgorithm {
      * @return true or false
      */
     public boolean checkSatisfiability(){
-<span class="fc bfc" id="L117" title="All 2 branches covered.">        for(int i=2*numVariables; i&gt;0; i--){</span>
-<span class="fc bfc" id="L118" title="All 2 branches covered.">            if(!this.visited[i]){</span>
-<span class="fc" id="L119">                dfs_reverse(i);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        for(int i=2*numVariables; i&gt;0; i--){</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">            if(!this.visited[i]){</span>
+<span class="fc" id="L115">                dfs_reverse(i);</span>
             }
-<span class="fc" id="L121">            this.order[this.finish[i]]=i;</span>
+<span class="fc" id="L117">            this.order[this.finish[i]]=i;</span>
         }
-<span class="fc" id="L123">        this.visited=new boolean[this.graph.length];</span>
+<span class="fc" id="L119">        this.visited=new boolean[this.graph.length];</span>
         
-<span class="fc bfc" id="L125" title="All 2 branches covered.">        for(int i=2*numVariables; i&gt;0; i--){</span>
-<span class="fc bfc" id="L126" title="All 2 branches covered.">            if(!visited[order[i]]){</span>
-<span class="fc" id="L127">                parent= order[i];</span>
-<span class="fc" id="L128">                dfs(order[i]);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for(int i=2*numVariables; i&gt;0; i--){</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            if(!visited[order[i]]){</span>
+<span class="fc" id="L123">                parent= order[i];</span>
+<span class="fc" id="L124">                dfs(order[i]);</span>
             }
         }
-<span class="fc bfc" id="L131" title="All 2 branches covered.">        for(int check=2*numVariables; check&gt;0; check--){</span>
-<span class="fc" id="L132">            int u=order[check];</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">            if(u &gt; numVariables){</span>
-<span class="fc bfc" id="L134" title="All 2 branches covered.">                if(stronglyConnected(u, u-numVariables)){</span>
-<span class="fc" id="L135">                    return false;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        for(int check=2*numVariables; check&gt;0; check--){</span>
+<span class="fc" id="L128">            int u=order[check];</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">            if(u &gt; numVariables){</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">                if(stronglyConnected(u, u-numVariables)){</span>
+<span class="fc" id="L131">                    return false;</span>
                 }
-<span class="fc bfc" id="L137" title="All 2 branches covered.">                if(!truthAssignment.containsKey(leader[u])){</span>
-<span class="fc" id="L138">                    truthAssignment.put(u,true);</span>
-<span class="fc" id="L139">                    truthAssignment.put(u-numVariables, false);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">                if(!truthAssignment.containsKey(leader[u])){</span>
+<span class="fc" id="L134">                    truthAssignment.put(u,true);</span>
+<span class="fc" id="L135">                    truthAssignment.put(u-numVariables, false);</span>
                 }
             }else{
-<span class="pc bpc" id="L142" title="1 of 2 branches missed.">                if(stronglyConnected(u, numVariables+u)){</span>
-<span class="nc" id="L143">                    return false;</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                if(stronglyConnected(u, numVariables+u)){</span>
+<span class="nc" id="L139">                    return false;</span>
                 }
-<span class="fc bfc" id="L145" title="All 2 branches covered.">                if(!truthAssignment.containsKey(leader[u])){</span>
-<span class="fc" id="L146">                    truthAssignment.put(u,true);</span>
-<span class="fc" id="L147">                    truthAssignment.put(u+numVariables, false);</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                if(!truthAssignment.containsKey(leader[u])){</span>
+<span class="fc" id="L142">                    truthAssignment.put(u,true);</span>
+<span class="fc" id="L143">                    truthAssignment.put(u+numVariables, false);</span>
                 }
             }
         }
-<span class="fc" id="L151">        return true;</span>
+<span class="fc" id="L147">        return true;</span>
     }
     
 }

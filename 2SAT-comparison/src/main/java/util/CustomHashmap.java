@@ -41,7 +41,7 @@ public class CustomHashmap<K, V> {
 
     }
     private HashMapEntry values[];
-    private int capacity = Integer.MAX_VALUE / 5;
+    private int capacity = Integer.MAX_VALUE / 10;
     private int size = 0;
 
     /**

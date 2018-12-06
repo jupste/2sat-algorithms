@@ -13,6 +13,8 @@
 
 [Viikko5](https://github.com/jupste/2sat-algorithms/blob/master/weeklyreports/viikko5.md)
 
+[Viikko6](https://github.com/jupste/2sat-algorithms/blob/master/weeklyreports/viikko6.md)
+
 ### Dokumentointi
 
 [Määrittelydokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documents/maarittely.md)

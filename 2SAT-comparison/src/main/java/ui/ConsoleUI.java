@@ -8,7 +8,6 @@ package ui;
 import comparison.BruteForce;
 import comparison.KosarajuAlgorithm;
 import comparison.TarjanAlgorithm;
-import java.util.ArrayList;
 import java.util.Scanner;
 import util.CustomArrayList;
 import util.GraphUtils;
@@ -26,18 +25,19 @@ public class ConsoleUI {
     private GraphUtils util;
     private int[] statement;
     private int numVariables;
+    private boolean run;
 
-    public ConsoleUI() {
-        this.scanner = new Scanner(System.in);
+    public ConsoleUI(Scanner scanner) {
+        this.scanner = scanner;
         this.brute = new BruteForce();
         this.util = new GraphUtils();
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to 2SAT-solver app!\n");
         String command = "";
-        while (true) {
+        run = true;
+        while (run) {
             while (true) {
                 System.out.println("\nType \"new\" to insert an CNF, \"help\" for help or \"exit\" to exit the application");
                 command = scanner.nextLine();
@@ -55,7 +55,7 @@ public class ConsoleUI {
                     break;
                 case "exit":
                     System.out.println("Thank you for using this app.");
-                    System.exit(0);
+                    run = false;
             }
 
         }
@@ -70,13 +70,28 @@ public class ConsoleUI {
     }
 
     public void insertNew() {
-        System.out.println("Insert the CNF:");
+        System.out.println("Insert the CNF or type \"big\" to generate a large CNF:");
+        CustomArrayList<Integer>[] graph = null;
         String CNF = scanner.nextLine();
-        statement = util.createFromString(CNF);
-        numVariables = util.countVariables(statement);
-        CustomArrayList<Integer>[] graph = util.initializeCNF(statement);
+        if (CNF.equals("big")) {
+            System.out.println("How many variables?");
+            int variables = Integer.parseInt(scanner.nextLine());
+            numVariables = variables;
+            System.out.println("Is the CNF satisfiable? y/n");
+            String SAT = scanner.nextLine();
+            switch (SAT) {
+                case ("y"):
+                    statement = util.initializeLargeSatisfiable(variables);
+                case ("n"):
+                    statement = util.initializeLargeNonSatisfiable(variables);
+            }
+        } else {
+            statement = util.createFromString(CNF);
+            numVariables = util.countVariables(statement);
+        }
 
-        while (true) {
+        graph = util.initializeCNF(statement);
+        while (run) {
             System.out.println("Which algorithm do you want to use to solve this?");
             System.out.println("1: Tarjan algorithm\n2: Kosaraju algorithm\n3: Brute force method\n4: exit");
             String selection = scanner.nextLine();
@@ -91,7 +106,7 @@ public class ConsoleUI {
                     break;
                 case ("4"):
                     System.out.println("Goodbye!");
-                    System.exit(0);
+                    run = false;
                     break;
                 case ("3"):
                     System.out.println("Warning! Brute force method has an exponential time complexity. Using this with CNF with more than 20 variables will take a really long time. ");
