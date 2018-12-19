@@ -5,7 +5,9 @@
  */
 package util;
 
+import java.util.HashMap;
 import util.CustomHashSet;
+import util.CustomHashmap.HashMapEntry;
 
 /**
  *

@@ -61,10 +61,10 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="datastructures.ArrayListTest" name="alistIsCreated" time="0"/>
-  <testcase classname="datastructures.ArrayListTest" name="alistWorksWithTestObject" time="0.001"/>
-  <testcase classname="datastructures.ArrayListTest" name="canAddCollectibles" time="0.001"/>
+  <testcase classname="datastructures.ArrayListTest" name="alistWorksWithTestObject" time="0.003"/>
+  <testcase classname="datastructures.ArrayListTest" name="canAddCollectibles" time="0"/>
   <testcase classname="datastructures.ArrayListTest" name="alistWorksWithStrings" time="0"/>
   <testcase classname="datastructures.ArrayListTest" name="alistWorksWithIntegers" time="0"/>
-  <testcase classname="datastructures.ArrayListTest" name="clearResetsTheArrayList" time="0.001"/>
-  <testcase classname="datastructures.ArrayListTest" name="containsMethodWorks" time="0"/>
+  <testcase classname="datastructures.ArrayListTest" name="clearResetsTheArrayList" time="0"/>
+  <testcase classname="datastructures.ArrayListTest" name="containsMethodWorks" time="0.001"/>
 </testsuite>

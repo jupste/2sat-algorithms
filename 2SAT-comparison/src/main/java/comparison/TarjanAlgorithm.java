@@ -7,6 +7,7 @@ package comparison;
 
 import util.CustomArrayList;
 import util.CustomHashmap;
+import util.UnicodeUtil;
 
 /**
  *
@@ -145,6 +146,19 @@ public class TarjanAlgorithm {
             }
         }
         return true;
+    }
+        public void printTruthAssesment(){
+        for(CustomHashmap.HashMapEntry<Integer, Boolean> e:  truthAssignment.entrySet()){
+            if(e.getKey()>numVariables){
+                continue;
+            }else{
+                String number="x";
+                for(char c: e.getKey().toString().toCharArray()){
+                    number+=UnicodeUtil.numbers[c-'0'];
+                }
+                System.out.println(number+" = "+ e.getValue());
+            }
+        }
     }
     
 }

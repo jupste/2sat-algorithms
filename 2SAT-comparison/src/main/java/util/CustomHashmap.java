@@ -15,7 +15,7 @@ package util;
  */
 public class CustomHashmap<K, V> {
 
-    static class HashMapEntry<K, V> {
+    public static class HashMapEntry<K, V> {
 
         private K key;
         private V value;
@@ -152,6 +152,15 @@ public class CustomHashmap<K, V> {
 
     private int hash(K key) {
         return key.hashCode() % capacity;
+    }
+    public CustomArrayList<HashMapEntry> entrySet(){
+        CustomArrayList<HashMapEntry> list= new CustomArrayList<>();
+        for(int i=0; i<this.capacity; i++){
+            if(values[i]!=null){
+                list.add(values[i]);
+            }
+        }
+        return list;
     }
 
     /**

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: algorithms.TarjanTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.201 sec - in algorithms.TarjanTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.427 sec
