@@ -25,7 +25,7 @@ public class CustomHashSet<K> {
         }
     }
     private HashSetEntry values[];
-    private int capacity = Integer.MAX_VALUE / 5;
+    private int capacity = Integer.MAX_VALUE / 10;
     private int size = 0;
 
     /**
@@ -40,8 +40,7 @@ public class CustomHashSet<K> {
      * Method to insert an entry to the hashset. If there is already an entry at
      * the place the hash points to, this method checks if it has the same key.
      * 
-     * @param key
-     * @param value
+     * @param key key to be added
      */
     public void add(K key) {
         HashSetEntry<K> entry = new HashSetEntry<>(key, null);
@@ -96,7 +95,7 @@ public class CustomHashSet<K> {
     /**
      * Method that removes a given key from the hashset.
      *
-     * @param key
+     * @param key key to be removed
      * @return true if the removal was succesful, false otherwise.
      */
     public boolean remove(K key) {

@@ -58,8 +58,8 @@ public class CustomHashmap<K, V> {
      * If the key is the same this method will override the value, if it is not
      * the same the method will find a new place for the entry.
      *
-     * @param key
-     * @param value
+     * @param key key value
+     * @param value value
      */
     public void put(K key, V value) {
         HashMapEntry<K, V> entry = new HashMapEntry<>(key, value, null);
@@ -123,7 +123,7 @@ public class CustomHashmap<K, V> {
     /**
      * Method that removes a given key from the hashmap along with it's value.
      *
-     * @param key
+     * @param key key to be removed
      * @return true if the removal was succesfull, false otherwise.
      */
     public boolean remove(K key) {

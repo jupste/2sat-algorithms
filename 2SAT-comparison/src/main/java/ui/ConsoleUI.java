@@ -30,7 +30,7 @@ public class ConsoleUI {
 
     /**
      *
-     * @param io
+     * @param io ConsoleIO when running the app, StubIO when testing
      */
     public ConsoleUI(IO io) {
         this.io = io;

@@ -84,10 +84,10 @@ public class GraphUtils {
      * of variables
      *
      * @param variables number of variables in the CNF
-     * @return
+     * @return array that emulates the CNF
      */
     public int[] initializeLargeSatisfiable(int variables) {
-        int[] statement = new int[1000000];
+        int[] statement = new int[10000];
         for (int i = 0; i < statement.length; i++) {
             statement[i] = i % variables + 1;
         }
@@ -99,10 +99,10 @@ public class GraphUtils {
      * of variables
      *
      * @param variables number of variables in the CNF
-     * @return
+     * @return array that emulates the CNF
      */
     public int[] initializeLargeNonSatisfiable(int variables) {
-        int[] statement = new int[1000000];
+        int[] statement = new int[10000];
         for (int i = 0; i < statement.length; i++) {
             statement[i] = i % variables + 1;
         }

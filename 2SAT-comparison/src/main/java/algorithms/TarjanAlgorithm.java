@@ -52,7 +52,7 @@ public class TarjanAlgorithm {
 
     /**
      * Not needed in final program
-     * @return
+     * @return the graph
      */
     public CustomArrayList<Integer>[] getGraph() {
         return graph;
@@ -60,7 +60,7 @@ public class TarjanAlgorithm {
     
     /**
      * Not needed in final program
-     * @return
+     * @return graph in reverse
      */
     public CustomArrayList<Integer>[] getReversegraph() {
         return reversegraph;

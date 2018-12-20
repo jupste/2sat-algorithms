@@ -77,7 +77,7 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Method to check if a given element is found in the arraylist
-     * @param t
+     * @param t object of a generic type
      * @return true if it is in the arraylist, false otherwise
      */
     public boolean contains(T t) {
@@ -91,7 +91,7 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Adds a new element to the arraylist. Also increases the array size if it is nearing it's max capasity
-     * @param e
+     * @param e object of a generic type
      */
     public void add(T e) {
         if (values.length - size <= 5) {
@@ -102,7 +102,7 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Add a Collection type entity to the arraylist
-     * @param c
+     * @param c Collections type object
      */
     public void addAll(Collection<? extends T> c) {
         for (T t : c) {
@@ -120,7 +120,7 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Returns a given index from the arraylist
-     * @param index 
+     * @param index index to fetch
      * @return object that the index points to
      */
     public T get(int index) {
@@ -133,7 +133,7 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Removes a given index from the arraylist
-     * @param index
+     * @param index index to remove
      * @return the removed object
      */
     public T remove(int index) {
@@ -155,8 +155,8 @@ public class CustomArrayList<T> implements Iterable<T> {
 
     /**
      * Return the index of the given object
-     * @param o
-     * @return
+     * @param o object of a generic type
+     * @return index of the given object if it exists. -1 otherwise.
      */
     public int indexOf(T o) {
         for (int i = 0; i < size; i++) {
