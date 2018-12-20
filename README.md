@@ -17,13 +17,13 @@
 
 ### Dokumentointi
 
-[Määrittelydokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documents/maarittely.md)
+[Määrittelydokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documentation/maarittely.md)
 
-[Toteutusdokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documents/toteutus.md)
+[Toteutusdokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documentation/toteutus.md)
 
-[Käyttöohje](https://github.com/jupste/2sat-algorithms/blob/master/documents/kayttoohje.md)
+[Käyttöohje](https://github.com/jupste/2sat-algorithms/blob/master/documentation/kayttoohje.md)
 
-[Testausdokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documents/testaus.md)
+[Testausdokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documentation/testaus.md)
 
 [Javadoc](http://htmlpreview.github.io/?https://github.com/jupste/2sat-algorithms/blob/master/documentation/apidocs/index.html)
 
