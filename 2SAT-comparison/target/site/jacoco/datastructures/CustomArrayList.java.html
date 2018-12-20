@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomArrayList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">2SAT-comparison</a> &gt; <a href="index.source.html" class="el_package">datastructures</a> &gt; <span class="el_source">CustomArrayList.java</span></div><h1>CustomArrayList.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package datastructures;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * Custom arraylist data structure that can be used to store different dataclasses.
+ * @author jussiste
+ * @param &lt;T&gt; A generic dataclass
+ */
+public class CustomArrayList&lt;T&gt; implements Iterable&lt;T&gt; {
+
+    protected Object[] values;
+    private int size;
+    private final static int DEFAULT_SIZE = 10;
+<span class="fc" id="L23">    private int arraySize = DEFAULT_SIZE;</span>
+
+    /**
+     * An inner class that is used to give CustomArrayList the iterable functionality
+     */
+<span class="fc" id="L28">    class ArrayIterator implements Iterator&lt;T&gt; {</span>
+
+<span class="fc" id="L30">        int current = 0;</span>
+
+        public boolean hasNext() {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (current &lt; CustomArrayList.this.size) {</span>
+<span class="fc" id="L34">                return true;</span>
+            } else {
+<span class="fc" id="L36">                return false;</span>
+            }
+        }
+
+        public T next() {
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">            if (!hasNext()) {</span>
+<span class="nc" id="L42">                throw new NoSuchElementException();</span>
+            }
+<span class="fc" id="L44">            return (T) values[current++];</span>
+        }
+    }//subclass
+
+    /**
+     * Gives the size of the arraylist
+     * @return size of array
+     */
+    public int size() {
+<span class="fc" id="L53">        return this.size;</span>
+    }
+
+    /**
+     * Method to check if the arraylist is empty
+     * @return true if array is empty
+     */
+    public boolean isEmpty() {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        return this.size == 0;</span>
+    }
+
+    /**
+     * Constructor that initializes the array.
+     */
+<span class="fc" id="L67">    public CustomArrayList() {</span>
+<span class="fc" id="L68">        values = new Object[DEFAULT_SIZE];</span>
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * Doubles the array size
+     */
+    public void increaseSize() {
+<span class="fc" id="L75">        values = Arrays.copyOf(values, values.length * 2);</span>
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Method to check if a given element is found in the arraylist
+     * @param t
+     * @return true if it is in the arraylist, false otherwise
+     */
+    public boolean contains(T t) {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (values[i].equals(t)) {</span>
+<span class="fc" id="L86">                return true;</span>
+            }
+        }
+<span class="nc" id="L89">        return false;</span>
+    }
+
+    /**
+     * Adds a new element to the arraylist. Also increases the array size if it is nearing it's max capasity
+     * @param e
+     */
+    public void add(T e) {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (values.length - size &lt;= 5) {</span>
+<span class="fc" id="L98">            increaseSize();</span>
+        }
+<span class="fc" id="L100">        values[size++] = e;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Add a Collection type entity to the arraylist
+     * @param c
+     */
+    public void addAll(Collection&lt;? extends T&gt; c) {
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (T t : c) {</span>
+<span class="fc" id="L109">            add(t);</span>
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Clears the arraylist of all entries
+     */
+    public void clear() {
+<span class="fc" id="L117">        this.size = 0;</span>
+<span class="fc" id="L118">        this.values = new Object[DEFAULT_SIZE];</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Returns a given index from the arraylist
+     * @param index 
+     * @return object that the index points to
+     */
+    public T get(int index) {
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if (index &lt; size) {</span>
+<span class="fc" id="L128">            return (T) values[index];</span>
+        } else {
+<span class="nc" id="L130">            throw new ArrayIndexOutOfBoundsException();</span>
+        }
+    }
+
+    /**
+     * Removes a given index from the arraylist
+     * @param index
+     * @return the removed object
+     */
+    public T remove(int index) {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (index &lt; size) {</span>
+<span class="nc" id="L141">            Object obj = values[index];</span>
+<span class="nc" id="L142">            values[index] = null;</span>
+<span class="nc" id="L143">            int tmp = index;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            while (tmp &lt; size) {</span>
+<span class="nc" id="L145">                values[tmp] = values[tmp + 1];</span>
+<span class="nc" id="L146">                values[tmp + 1] = null;</span>
+<span class="nc" id="L147">                tmp++;</span>
+            }
+<span class="nc" id="L149">            size--;</span>
+<span class="nc" id="L150">            return (T) obj;</span>
+        } else {
+<span class="nc" id="L152">            throw new ArrayIndexOutOfBoundsException();</span>
+        }
+    }
+
+    /**
+     * Return the index of the given object
+     * @param o
+     * @return
+     */
+    public int indexOf(T o) {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            if (values[i].equals(o)) {</span>
+<span class="nc" id="L164">                return i;</span>
+            }
+        }
+<span class="nc" id="L167">        return -1;</span>
+    }
+
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+<span class="fc" id="L172">        return new ArrayIterator();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
