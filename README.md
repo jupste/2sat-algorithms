@@ -24,3 +24,9 @@
 [Käyttöohje](https://github.com/jupste/2sat-algorithms/blob/master/documents/kayttoohje.md)
 
 [Testausdokumentti](https://github.com/jupste/2sat-algorithms/blob/master/documents/testaus.md)
+
+[Javadoc](https://github.com/jupste/2sat-algorithms/blob/master/documents/apidocs/index.html)
+
+Javadocin saa myös itse generoitua komennolla
+> cd 2SAT-comparison
+> mvn javadoc:javadoc
