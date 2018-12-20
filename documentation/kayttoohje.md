@@ -6,6 +6,11 @@ Lataa ohjelma omalle koneelle githubista joko ylhällä näkyvän "Clone reposit
 
 Tämän jälkeen siirrytään projektikansion juureen eli 2SAT-algorithms/2SAT-comparison
 
+Suoritettavan .jar tiedoston saa luotua komennolla
+- mvn package
+
+.jar tiedosto löytyy osoitteesta 2SAT-comparison/target/2SAT-comparison-1.0-SNAPSHOT.jar
+
 Ohjelman saa käynnistettyä komennolla
 - mvn exec:java
 
