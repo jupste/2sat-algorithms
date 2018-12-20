@@ -6,20 +6,21 @@
 package comparison;
 
 
+import io.ConsoleIO;
 import java.util.Scanner;
 import ui.ConsoleUI;
 /**
  *
  * @author jussiste
  */
-<span class="nc" id="L15">public class Main {</span>
+<span class="nc" id="L16">public class Main {</span>
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-<span class="nc" id="L20">        ConsoleUI ui=new ConsoleUI(new Scanner(System.in));</span>
-<span class="nc" id="L21">        ui.start();  </span>
-<span class="nc" id="L22">    }</span>
+<span class="nc" id="L21">        ConsoleUI ui=new ConsoleUI(new ConsoleIO(new Scanner(System.in)));</span>
+<span class="nc" id="L22">        ui.start();  </span>
+<span class="nc" id="L23">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -5,13 +5,8 @@
  */
 package ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import datastructures.CustomArrayList;
+import io.StubIO;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,57 +17,70 @@ import static org.junit.Assert.*;
 public class UserInterfaceTest {
 
     ConsoleUI ui;
+    StubIO io;
 
-    @Test
-    public void UIallowsToCreateHandwrittenCNF() throws FileNotFoundException {
-        File file = null;
-        try {
-            file = new File("src/test/resources/testinput1");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void initializeTestOne() {
+        CustomArrayList<String> lines = new CustomArrayList<>();
+        lines.add("new");
+        lines.add("1 2 -1 2");
+        lines.add("1");
+        lines.add("2");
+        lines.add("3");
+        lines.add("y");
+        lines.add("5");
+        lines.add("exit");
+        io = new StubIO(lines);
+    }
 
-        ui = new ConsoleUI(new Scanner(file));
-        ui.start();
-        assertTrue(true);
+    private void initializeTestTwo() {
+        CustomArrayList<String> lines = new CustomArrayList<>();
+        lines.add("help");
+        lines.add("new");
+        lines.add("big");
+        lines.add("10");
+        lines.add("y");
+        lines.add("1");
+        lines.add("4");
+        lines.add("5");
+        lines.add("exit");
+        io = new StubIO(lines);
+    }
+
+    private void initializeTestThree() {
+        CustomArrayList<String> lines = new CustomArrayList<>();
+        lines.add("help");
+        lines.add("new");
+        lines.add("big");
+        lines.add("10");
+        lines.add("n");
+        lines.add("1");
+        lines.add("4");
+        lines.add("5");
+        lines.add("exit");
+        io = new StubIO(lines);
     }
 
     @Test
-    public void UIallowsToCreateGeneratedSatisfiableCNF() throws FileNotFoundException {
-        File file = null;
-        try {
-            file = new File("src/test/resources/testinput2");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ui = new ConsoleUI(new Scanner(file));
+    public void UIallowsToCreateHandwrittenCNF() {
+        initializeTestOne();
+        ui = new ConsoleUI(io);
         ui.start();
-        assertTrue(true);
+        assertTrue(io.getPrints().contains("Thank you for using this app."));
     }
 
     @Test
-    public void UIAllowstoCreateGeneratedNonSatisfiableCNF() throws FileNotFoundException {
-        File file = null;
-        try {
-            file = new File("src/test/resources/testinput3");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ui = new ConsoleUI(new Scanner(file));
+    public void UIallowsToCreateGeneratedSatisfiableCNF() {
+        initializeTestTwo();
+        ui = new ConsoleUI(io);
         ui.start();
-        assertTrue(true);
+        assertTrue(io.getPrints().contains("satisfiable."));
     }
 
     @Test
-    public void helpAndExitCommandsWork() throws FileNotFoundException {
-        File file = null;
-        try {
-            file = new File("src/test/resources/testinput4");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ui = new ConsoleUI(new Scanner(file));
+    public void UIAllowstoCreateGeneratedNonSatisfiableCNF() {
+        initializeTestThree();
+        ui=new ConsoleUI(io);
         ui.start();
-        assertTrue(true);
+        assertTrue(io.getPrints().contains("not satisfiable."));
     }
 }

@@ -1,9 +1,3 @@
-comparison/BruteForce.class
-util/CustomHashmap.class
-util/CustomHashmap$HashMapEntry.class
-comparison/TarjanAlgorithm.class
-comparison/KosarajuAlgorithm.class
 comparison/Main.class
-util/CustomStack.class
 util/GraphUtils.class
 ui/ConsoleUI.class

@@ -5,9 +5,10 @@
  */
 package util;
 
+import datastructures.CustomArrayList;
 import java.util.HashMap;
-import util.CustomHashSet;
-import util.CustomHashmap.HashMapEntry;
+import datastructures.CustomHashSet;
+import datastructures.CustomHashmap.HashMapEntry;
 
 /**
  *

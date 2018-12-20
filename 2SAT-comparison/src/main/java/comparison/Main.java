@@ -6,6 +6,7 @@
 package comparison;
 
 
+import io.ConsoleIO;
 import java.util.Scanner;
 import ui.ConsoleUI;
 /**
@@ -17,7 +18,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ConsoleUI ui=new ConsoleUI(new Scanner(System.in));
+        ConsoleUI ui=new ConsoleUI(new ConsoleIO(new Scanner(System.in)));
         ui.start();  
     }
     

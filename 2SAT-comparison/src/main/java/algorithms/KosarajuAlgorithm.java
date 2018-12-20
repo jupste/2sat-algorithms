@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package comparison;
+package algorithms;
 
-import util.CustomArrayList;
-import util.CustomHashmap;
-import util.CustomStack;
+import datastructures.CustomArrayList;
+import datastructures.CustomHashmap;
+import datastructures.CustomStack;
 
 /**
  *

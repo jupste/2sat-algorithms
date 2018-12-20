@@ -5,35 +5,38 @@
  */
 package util;
 
-import util.CustomHashSet;
+import datastructures.CustomArrayList;
+import java.util.HashMap;
+import datastructures.CustomHashSet;
+import datastructures.CustomHashmap.HashMapEntry;
 
 /**
  *
  * @author jussiste
  */
-<span class="fc" id="L14">public class GraphUtils {</span>
+<span class="fc" id="L17">public class GraphUtils {</span>
 
     /**
      * @param CNF string that contains only numbers
      * @return the CNF in integer array form if the string is valid. Otherwise returns an empty array.
      */
     public int[] createFromString(String CNF) {
-<span class="fc" id="L21">        String parse = CNF.replaceAll(&quot;;&quot;, &quot;&quot;);</span>
-<span class="fc" id="L22">        String[] variables = parse.split(&quot; &quot;);</span>
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (variables.length % 2 != 0) {</span>
-<span class="nc" id="L24">            System.out.println(&quot;Invalid CNF please try again.&quot;);</span>
-<span class="nc" id="L25">            return new int[0];</span>
+<span class="fc" id="L24">        String parse = CNF.replaceAll(&quot;;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L25">        String[] variables = parse.split(&quot; &quot;);</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (variables.length % 2 != 0) {</span>
+<span class="nc" id="L27">            System.out.println(&quot;Invalid CNF please try again.&quot;);</span>
+<span class="nc" id="L28">            return new int[0];</span>
         }
-<span class="fc" id="L27">        int[] statement = new int[variables.length];</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; variables.length; i++) {</span>
+<span class="fc" id="L30">        int[] statement = new int[variables.length];</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int i = 0; i &lt; variables.length; i++) {</span>
             try {
-<span class="fc" id="L30">                statement[i] = Integer.parseInt(variables[i]);</span>
-<span class="nc" id="L31">            } catch (NumberFormatException e) {</span>
-<span class="nc" id="L32">                System.out.println(&quot;Invalid CNF. Please try again&quot;);</span>
-<span class="nc" id="L33">                return new int[0];</span>
-<span class="fc" id="L34">            }</span>
+<span class="fc" id="L33">                statement[i] = Integer.parseInt(variables[i]);</span>
+<span class="nc" id="L34">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L35">                System.out.println(&quot;Invalid CNF. Please try again&quot;);</span>
+<span class="nc" id="L36">                return new int[0];</span>
+<span class="fc" id="L37">            }</span>
         }
-<span class="fc" id="L36">        return statement;</span>
+<span class="fc" id="L39">        return statement;</span>
     }
 
     /**
@@ -46,34 +49,34 @@ import util.CustomHashSet;
      * @return the statement in graph form
      */
     public CustomArrayList&lt;Integer&gt;[] initializeCNF(int[] statement) {
-<span class="fc" id="L49">        int count = countVariables(statement);</span>
-<span class="fc" id="L50">        CustomArrayList&lt;Integer&gt;[] graph = new CustomArrayList[(4 * count * count)];</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int i = 0; i &lt; graph.length; i++) {</span>
-<span class="fc" id="L52">            graph[i] = new CustomArrayList&lt;&gt;();</span>
+<span class="fc" id="L52">        int count = countVariables(statement);</span>
+<span class="fc" id="L53">        CustomArrayList&lt;Integer&gt;[] graph = new CustomArrayList[(4 * count * count)];</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (int i = 0; i &lt; graph.length; i++) {</span>
+<span class="fc" id="L55">            graph[i] = new CustomArrayList&lt;&gt;();</span>
         }
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (statement.length % 2 == 1) {</span>
-<span class="nc" id="L55">            return graph;</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (statement.length % 2 == 1) {</span>
+<span class="nc" id="L58">            return graph;</span>
         }
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length - 1; i++) {</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (statement[i] &gt; 0) {</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
-<span class="fc" id="L60">                    graph[count + statement[i]].add(statement[i + 1]);</span>
-<span class="fc" id="L61">                    graph[count + statement[i + 1]].add(statement[i]);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length - 1; i++) {</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (statement[i] &gt; 0) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
+<span class="fc" id="L63">                    graph[count + statement[i]].add(statement[i + 1]);</span>
+<span class="fc" id="L64">                    graph[count + statement[i + 1]].add(statement[i]);</span>
                 } else {
-<span class="fc" id="L63">                    graph[count + statement[i]].add(count - statement[i + 1]);</span>
-<span class="fc" id="L64">                    graph[-statement[i + 1]].add(statement[i]);</span>
+<span class="fc" id="L66">                    graph[count + statement[i]].add(count - statement[i + 1]);</span>
+<span class="fc" id="L67">                    graph[-statement[i + 1]].add(statement[i]);</span>
                 }
             } else {
-<span class="fc bfc" id="L67" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
-<span class="fc" id="L68">                    graph[-statement[i]].add(statement[i + 1]);</span>
-<span class="fc" id="L69">                    graph[count + statement[i + 1]].add(count - statement[i]);</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">                if (statement[i + 1] &gt; 0) {</span>
+<span class="fc" id="L71">                    graph[-statement[i]].add(statement[i + 1]);</span>
+<span class="fc" id="L72">                    graph[count + statement[i + 1]].add(count - statement[i]);</span>
                 } else {
-<span class="fc" id="L71">                    graph[-statement[i]].add(count - statement[i + 1]);</span>
-<span class="fc" id="L72">                    graph[-statement[i + 1]].add(count - statement[i]);</span>
+<span class="fc" id="L74">                    graph[-statement[i]].add(count - statement[i + 1]);</span>
+<span class="fc" id="L75">                    graph[-statement[i + 1]].add(count - statement[i]);</span>
                 }
             }
         }
-<span class="fc" id="L76">        return graph;</span>
+<span class="fc" id="L79">        return graph;</span>
     }
 
     /**
@@ -84,11 +87,11 @@ import util.CustomHashSet;
      * @return
      */
     public int[] initializeLargeSatisfiable(int variables) {
-<span class="fc" id="L87">        int[] statement = new int[1000000];</span>
-<span class="fc bfc" id="L88" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
-<span class="fc" id="L89">            statement[i] = i % variables + 1;</span>
+<span class="fc" id="L90">        int[] statement = new int[1000000];</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L92">            statement[i] = i % variables + 1;</span>
         }
-<span class="fc" id="L91">        return statement;</span>
+<span class="fc" id="L94">        return statement;</span>
     }
 
     /**
@@ -99,15 +102,15 @@ import util.CustomHashSet;
      * @return
      */
     public int[] initializeLargeNonSatisfiable(int variables) {
-<span class="fc" id="L102">        int[] statement = new int[1000000];</span>
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
-<span class="fc" id="L104">            statement[i] = i % variables + 1;</span>
+<span class="fc" id="L105">        int[] statement = new int[1000000];</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L107">            statement[i] = i % variables + 1;</span>
         }
-<span class="fc" id="L106">        statement[100] = 1;</span>
-<span class="fc" id="L107">        statement[101] = 1;</span>
-<span class="fc" id="L108">        statement[102] = -1;</span>
-<span class="fc" id="L109">        statement[103] = -1;</span>
-<span class="fc" id="L110">        return statement;</span>
+<span class="fc" id="L109">        statement[100] = 1;</span>
+<span class="fc" id="L110">        statement[101] = 1;</span>
+<span class="fc" id="L111">        statement[102] = -1;</span>
+<span class="fc" id="L112">        statement[103] = -1;</span>
+<span class="fc" id="L113">        return statement;</span>
     }
 
     /**
@@ -118,11 +121,11 @@ import util.CustomHashSet;
      * @return number of variables
      */
     public int countVariables(int[] statement) {
-<span class="fc" id="L121">        CustomHashSet&lt;Integer&gt; variables = new CustomHashSet&lt;&gt;();</span>
-<span class="fc bfc" id="L122" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
-<span class="fc" id="L123">            variables.add(Math.abs(statement[i]));</span>
+<span class="fc" id="L124">        CustomHashSet&lt;Integer&gt; variables = new CustomHashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        for (int i = 0; i &lt; statement.length; i++) {</span>
+<span class="fc" id="L126">            variables.add(Math.abs(statement[i]));</span>
         }
-<span class="fc" id="L125">        return variables.size();</span>
+<span class="fc" id="L128">        return variables.size();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

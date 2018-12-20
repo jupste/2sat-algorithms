@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package datastructures;
 
 /**
  * A custom hashmap that can take different key and value types. Uses an

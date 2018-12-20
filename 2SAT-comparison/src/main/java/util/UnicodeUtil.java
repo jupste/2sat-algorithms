@@ -10,6 +10,7 @@ package util;
  * @author jussiste
  */
 public class UnicodeUtil {
+    private UnicodeUtil(){}
     public static String[] numbers=new String[]{"\u2080","\u2081","\u2082","\u2083","\u2084","\u2085","\u2086","\u2087","\u2088","\u2089"};
     public static String conjunction= "\u2227";
     public static String disjunction="\u2228";
