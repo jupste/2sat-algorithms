@@ -4,7 +4,7 @@
 
 Ohjelma eri algoritmien toimintaa erilaisilla syötteillä. Testejä on olemassa myös itseluoduille tietorakenteille. Kaiken kaikkiaan testien rivikattavuus on melko hyvä ja noin 80% rajoilla. Ongelmaksi muodostui hajautustaulujen yhteentörmäyksien testaaminen.
 
-[!testcoverage](https://github.com/jupste/2sat-algorithms/blob/master/documents/testcoverage.jpg)
+![testcoverage](https://github.com/jupste/2sat-algorithms/blob/master/documents/testcoverage.jpg)
 
 ### Testisyötteet
 
