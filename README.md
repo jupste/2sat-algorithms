@@ -29,4 +29,5 @@
 
 Javadocin saa myös itse generoitua komennolla
 > cd 2SAT-comparison
+
 > mvn javadoc:javadoc
